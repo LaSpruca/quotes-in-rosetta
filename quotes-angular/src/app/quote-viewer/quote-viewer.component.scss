@@ -1,0 +1,60 @@
+.quote-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-width: 25rem;
+  border-radius: 10px 5px 10px 5px;
+  filter: drop-shadow(black 0 0 5px);
+
+  justify-content: center;
+  align-items: center;
+  color: white;
+
+  background-color: black;
+  padding: 1rem;
+
+  .quote {
+    font-weight: bolder;
+    font-size: 15pt;
+    text-align: left;
+    align-self: flex-start;
+  }
+
+  .person {
+    color: #efefef;
+    font-weight: bold;
+  }
+
+  .quote-details {
+    color: #eee;
+    text-align: right;
+    align-self: flex-end;
+    font-size: 12pt;
+  }
+
+  .vaish {
+    pointer-events: none;
+    position: absolute;
+    left: 0.25rem;
+    bottom: 0.25rem;
+    background: none;
+    color: #ddd;
+    font-weight: bolder;
+    border: none;
+    outline: none !important;
+    transition: all 0.1s ease-in-out;
+    opacity: 0;
+
+    &:hover {
+      color: white;
+      font-weight: bolder;
+    }
+  }
+
+  &:hover {
+    .vaish {
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
+}

@@ -1,0 +1,70 @@
+.quote-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-width: 25rem;
+  border-radius: 10px 5px 10px 5px;
+  filter: drop-shadow(black 0 0 5px);
+
+  justify-content: center;
+  align-items: center;
+  color: white;
+
+  background-color: black;
+  padding: 1rem;
+
+  .quote {
+    font-weight: bolder;
+    font-size: 15pt;
+    text-align: left;
+    align-self: flex-start;
+  }
+
+  .person {
+    color: #efefef;
+    font-weight: bold;
+    text-align: right;
+  }
+
+  .quote-details {
+    color: #eee;
+    text-align: right;
+    align-self: flex-end;
+    font-size: 12pt;
+
+    input {
+      width: 10rem;
+    }
+  }
+
+  input {
+    background-color: #fff2;
+    border: none;
+    border-radius: 2px;
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    &:focus-visible {
+      outline: none;
+    }
+    &.error {
+      outline: red 1px solid;
+    }
+  }
+}
+
+button {
+  margin-top: 1rem;
+  background-color: #fff1;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  font-size: 10pt;
+  padding: 0.5rem;
+  border-radius: 1px;
+
+  &:disabled {
+    color: #ddd;
+    pointer-events: none;
+  }
+}

@@ -1,0 +1,17 @@
+<div class="quote-wrapper">
+  <span class="quote">“<input #quoteField />”</span>
+  <span class="quote-details">
+    <input class="person" #personField /> -
+    <input
+      #dateField
+      [class.error]="dateError"
+      (keyup)="checkDate(dateField.value)"
+    />
+  </span>
+  <button
+    (click)="addQuote(quoteField.value, personField.value, dateField.value)"
+    [disabled]="buttonDisabled"
+  >
+    Add
+  </button>
+</div>

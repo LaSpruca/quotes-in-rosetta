@@ -1,0 +1,8 @@
+<h1 class="title">Le quotes</h1>
+
+<div class="quotes-box">
+  <app-add-quote></app-add-quote>
+  <ng-container *ngFor="let quote of quotes; index as i">
+    <app-quote-viewer [quote]="quote" [index]="i"></app-quote-viewer>
+  </ng-container>
+</div>
