@@ -3,4 +3,5 @@ declare type Quote = {
   quote: string;
   person: string;
   date: Date;
+  index?: number;
 };

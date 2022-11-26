@@ -2,7 +2,9 @@ import { LitElement, html, css } from "lit";
 import { customElement, query, state } from "lit/decorators.js";
 import { getQuotes } from "./quotes";
 import Fuse from "fuse.js";
+
 import "./quote-element";
+import "./add-quote";
 
 @customElement("quote-app")
 class App extends LitElement {
@@ -56,12 +58,19 @@ class App extends LitElement {
 
   render() {
     let quoteElements = this.quotesFiltered.map(
-      (quote) => html`<quote-element .quote=${quote}></quote-element>`
+      (quote, index) =>
+        html`<quote-element
+          .quote=${quote}
+          index=${quote.index ?? index}
+          @quoteChange=${this.reloadQuotes}
+        ></quote-element>`
     );
     return html`
+      <h1>Le Quote</h1>
       <label for="search" class="search-wrapper">
         Search <input @keyup=${this._queryValueUpdated} id="search" />
       </label>
+      <add-quote @reloadQuotes=${this.reloadQuotes}></add-quote>
       <div class="quotes">${quoteElements}</div>
     `;
   }
@@ -72,26 +81,24 @@ class App extends LitElement {
       this.quotesFiltered = this.quotes;
     } else {
       const filtered = this.quotesFuse.search(text);
-      console.log(
-        filtered.map((item) => {
-          return { quote: item.item.quote, score: item.score };
-        })
-      );
-      this.quotesFiltered = filtered.map((fuseRes) => fuseRes.item);
+      this.quotesFiltered = filtered.map((fuseRes) => {
+        return { ...fuseRes.item, index: fuseRes.refIndex };
+      });
     }
   }
 
   async connectedCallback(): Promise<void> {
     super.connectedCallback();
+    await this.reloadQuotes();
+  }
+
+  async reloadQuotes() {
     this.quotes = await getQuotes();
     this.quotesFiltered = this.quotes;
     this.quotesFuse = new Fuse(this.quotes, {
       keys: ["person", "quote"],
       threshold: 0.3,
     });
-
-    console.log(this.quotes);
-    console.log(this.input);
   }
 
   attributeChangedCallback(
